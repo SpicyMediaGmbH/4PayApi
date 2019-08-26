@@ -37,7 +37,7 @@ class FourPayApiClient
 
     public function authorizeSms(int $amount, string $type, string $msisdn, ?string $mccmnc, string $callbackurl, string $stopsubcallbackurl, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false): SmsAuthorizeResponse
     {
-        $response = API::getInstance($this->servicename, $this->password)->authorizeSms($amount,$type,$msisdn, $mccmnc,$callbackurl,$stopsubcallbackurl);
+        $response = API::getInstance($this->servicename, $this->password)->authorizeSms($amount,$type,$msisdn, $mccmnc,$callbackurl,$stopsubcallbackurl, $txt1, $txt2, $txt3, $details);
         if (!$response) {
             throw new Exception('shit happened');
         }
@@ -47,7 +47,7 @@ class FourPayApiClient
 
     public function authorizeWeb(int $amount, string $type, string $msisdn, string $okurl, string $errorurl, ?string $mccmnc, string $stopsubcallbackurl, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false): WebAuthorizeResponse
     {
-        $response = API::getInstance($this->servicename, $this->password)->authorizeWeb($amount, $type, $msisdn, $okurl, $errorurl, $mccmnc, $stopsubcallbackurl);
+        $response = API::getInstance($this->servicename, $this->password)->authorizeWeb($amount, $type, $msisdn, $okurl, $errorurl, $mccmnc, $stopsubcallbackurl, $txt1, $txt2, $txt3, $details);
         if (!$response) {
             throw new Exception('shit happened');
         }
@@ -67,7 +67,7 @@ class FourPayApiClient
 
     public function authorizeWap(int $amount, string $type, string $msisdn, ?string $mccmnc, string $okurl, string $errorurl, string $stopsubcallbackurl, string $description, string $gtc, string $imprint, string $contact, string $faq, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false): WapAuthorizeResponse
     {
-        $response = API::getInstance($this->servicename, $this->password)->authorizeWap($amount, $type, $msisdn, $mccmnc, $okurl, $errorurl, $stopsubcallbackurl, $description, $gtc, $imprint, $contact, $faq);
+        $response = API::getInstance($this->servicename, $this->password)->authorizeWap($amount, $type, $msisdn, $mccmnc, $okurl, $errorurl, $stopsubcallbackurl, $description, $gtc, $imprint, $contact, $faq, $txt1, $txt2, $txt3, $details);
         if (!$response) {
             throw new Exception('shit happened');
         }
