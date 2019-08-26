@@ -3,6 +3,7 @@
 
 namespace FourPayApi\Responses;
 
+use JMS\Serializer\Annotation as Serializer;
 
 class WapAuthorizeResponse extends BaseResponse
 {
