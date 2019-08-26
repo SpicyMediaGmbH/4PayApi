@@ -34,7 +34,7 @@ class API
         return self::$instance;
     }
 
-    public function authorizeSms(int $amount, string $type, string $msisdn, string $mccmnc, string $callbackurl, string $stopsubcallbackurl, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false)
+    public function authorizeSms(int $amount, string $type, string $msisdn, ?string $mccmnc, string $callbackurl, string $stopsubcallbackurl, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false)
     {
         return $this->makeGetRequest([
             'command' => 'smsauthorize',
@@ -53,7 +53,7 @@ class API
         ]);
     }
 
-    public function authorizeWeb(int $amount, string $type, string $msisdn, string $okurl, string $errorurl, string $mccmnc, string $stopsubcallbackurl, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false)
+    public function authorizeWeb(int $amount, string $type, string $msisdn, string $okurl, string $errorurl, ?string $mccmnc, string $stopsubcallbackurl, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false)
     {
         return $this->makeGetRequest([
             'command' => 'webauthorize',
@@ -88,7 +88,7 @@ class API
         ]);
     }
 
-    public function authorizeWap(int $amount, string $type, string $msisdn, string $mccmnc, string $okurl, string $errorurl, string $stopsubcallbackurl, string $description, string $gtc, string $imprint, string $contact, string $faq, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false)
+    public function authorizeWap(int $amount, string $type, string $msisdn, ?string $mccmnc, string $okurl, string $errorurl, string $stopsubcallbackurl, string $description, string $gtc, string $imprint, string $contact, string $faq, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false)
     {
         return $this->makeGetRequest([
             'command' => 'wapauthorize',
