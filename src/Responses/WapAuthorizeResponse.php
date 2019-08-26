@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Responses;
+namespace FourPayApi\Responses;
 
 
 class WapAuthorizeResponse extends BaseResponse

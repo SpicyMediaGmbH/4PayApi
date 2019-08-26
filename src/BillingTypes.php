@@ -1,5 +1,6 @@
 <?php
 
+namespace FourPayApi;
 
 class BillingTypes
 {

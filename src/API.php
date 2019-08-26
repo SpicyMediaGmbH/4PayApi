@@ -1,5 +1,6 @@
 <?php
 
+namespace FourPayApi;
 
 use GuzzleHttp\Psr7\Request;
 use Http\Adapter\Guzzle6\Client;
@@ -145,6 +146,19 @@ class API
                 'password' => $this->password,
                 'txid' => $txid,
                 'detail' => $details
+            ]
+        );
+    }
+
+    public function refund(string $txid, ?int $amount = null, bool $details = false)
+    {
+        return $this->makeGetRequest([
+                'command' => 'refund',
+                'servicename' => $this->servicename,
+                'password' => $this->password,
+                'txid' => $txid,
+                'detail' => $details,
+                'amount'=> $amount
             ]
         );
     }

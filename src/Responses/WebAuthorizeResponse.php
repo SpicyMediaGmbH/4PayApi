@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Responses;
+namespace FourPayApi\Responses;
 
 
 use JMS\Serializer\Annotation as Serializer;

@@ -4,7 +4,7 @@
 namespace FourPayApi\Responses;
 
 
-class GetMnoResponse extends BaseResponse
+class RefundResponse extends BaseResponse
 {
 
 }

@@ -1,15 +1,17 @@
 <?php
 
+namespace FourPayApi;
 
+use FourPayApi\Responses\RefundResponse;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
-use Responses\BillResponse;
-use Responses\GetMnoResponse;
-use Responses\SmsAuthorizeResponse;
-use Responses\StopSubscriptionResponse;
-use Responses\WapAuthorizeResponse;
-use Responses\WebAuthorizeResponse;
-use Responses\WebValidatePinResponse;
+use FourPayApi\Responses\BillResponse;
+use FourPayApi\Responses\GetMnoResponse;
+use FourPayApi\Responses\SmsAuthorizeResponse;
+use FourPayApi\Responses\StopSubscriptionResponse;
+use FourPayApi\Responses\WapAuthorizeResponse;
+use FourPayApi\Responses\WebAuthorizeResponse;
+use FourPayApi\Responses\WebValidatePinResponse;
 
 class FourPayApiClient
 {
@@ -100,5 +102,15 @@ class FourPayApiClient
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),GetMnoResponse::class,'xml');
+    }
+
+    public function refund(string $txid, ?int $amount = null, bool $details = false)
+    {
+        $response = API::getInstance($this->servicename, $this->password)->refund($txid, $amount,$details);
+        if (!$response) {
+            throw new Exception('shit happened');
+        }
+
+        return $this->serializer->deserialize($response->getBody()->getContents(),RefundResponse::class,'xml');
     }
 }

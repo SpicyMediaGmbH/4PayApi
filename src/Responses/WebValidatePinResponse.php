@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Responses;
+namespace FourPayApi\Responses;
 
 
 class WebValidatePinResponse extends BaseResponse
