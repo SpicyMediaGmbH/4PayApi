@@ -170,7 +170,7 @@ class API
             return $this->adapter->sendRequest($request);
         } catch (\Http\Client\Exception $e) {
             echo $e->getTraceAsString();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             echo $e->getTraceAsString();
         }
 
