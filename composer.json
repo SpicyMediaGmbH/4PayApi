@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Http\\Client\\": "src/"
+            "FourPayApi\\": "src/"
         }
     }
 }
