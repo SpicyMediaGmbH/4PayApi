@@ -15,7 +15,7 @@ abstract class BaseResponse
     private $statuscode;
     /**
      * @var string
-     * @Serializer\Type("text")
+     * @Serializer\Type("string")
      */
     private $statustext;
 
