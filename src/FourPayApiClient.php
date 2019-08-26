@@ -2,6 +2,7 @@
 
 namespace FourPayApi;
 
+use FourPayApi\Responses\BaseResponse;
 use FourPayApi\Responses\RefundResponse;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
@@ -112,5 +113,10 @@ class FourPayApiClient
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),RefundResponse::class,'xml');
+    }
+
+    public function responseToJson(BaseResponse $response)
+    {
+        return $this->serializer->serialize($response,'json');
     }
 }
