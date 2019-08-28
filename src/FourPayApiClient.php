@@ -3,6 +3,7 @@
 namespace FourPayApi;
 
 use FourPayApi\Responses\BaseResponse;
+use FourPayApi\Responses\BulkBillResponse;
 use FourPayApi\Responses\RefundResponse;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
@@ -39,7 +40,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->authorizeSms($amount,$type,$msisdn, $mccmnc,$callbackurl,$stopsubcallbackurl, $txt1, $txt2, $txt3, $details);
         if (!$response) {
-            throw new Exception('shit happened');
+            throw new \Exception('shit happened');
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),SmsAuthorizeResponse::class,'xml');
@@ -49,7 +50,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->authorizeWeb($amount, $type, $msisdn, $okurl, $errorurl, $mccmnc, $stopsubcallbackurl, $txt1, $txt2, $txt3, $details);
         if (!$response) {
-            throw new Exception('shit happened');
+            throw new \Exception('shit happened');
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),WebAuthorizeResponse::class,'xml');
@@ -59,7 +60,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->validateWebPin($txid, $pin);
         if (!$response) {
-            throw new Exception('shit happened');
+            throw new \Exception('shit happened');
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),WebValidatePinResponse::class,'xml');
@@ -69,17 +70,17 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->authorizeWap($amount, $type, $msisdn, $mccmnc, $okurl, $errorurl, $stopsubcallbackurl, $description, $gtc, $imprint, $contact, $faq, $txt1, $txt2, $txt3, $details);
         if (!$response) {
-            throw new Exception('shit happened');
+            throw new \Exception('shit happened');
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),WapAuthorizeResponse::class,'xml');
     }
 
-    public function bill(string $txid, int $amount, bool $details = false)
+    public function bill(string $txid, int $amount, bool $details = false): BillResponse
     {
         $response = API::getInstance($this->servicename, $this->password)->bill($txid, $amount, $details);
         if (!$response) {
-            throw new Exception('shit happened');
+            throw new \Exception('shit happened');
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),BillResponse::class,'xml');
@@ -89,30 +90,44 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->stopSubscription($txid, $details);
         if (!$response) {
-            throw new Exception('shit happened');
+            throw new \Exception('shit happened');
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),StopSubscriptionResponse::class,'xml');
     }
 
-    public function getMno(string $txid, bool $details = false): StopSubscriptionResponse
+    public function getMno(string $txid, bool $details = false): GetMnoResponse
     {
         $response = API::getInstance($this->servicename, $this->password)->getMno($txid, $details);
         if (!$response) {
-            throw new Exception('shit happened');
+            throw new \Exception('shit happened');
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),GetMnoResponse::class,'xml');
     }
 
-    public function refund(string $txid, ?int $amount = null, bool $details = false)
+    public function refund(string $txid, ?int $amount = null, bool $details = false): RefundResponse
     {
         $response = API::getInstance($this->servicename, $this->password)->refund($txid, $amount,$details);
         if (!$response) {
-            throw new Exception('shit happened');
+            throw new \Exception('shit happened');
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),RefundResponse::class,'xml');
+    }
+
+    public function bulkbill(array $txids, string $bulkuid, string $callbackUrl, bool $details = false): BulkBillResponse
+    {
+        if (count($txids) > 500) {
+            throw new \InvalidArgumentException('txids can not have more than 500 ids');
+        }
+
+        $response = API::getInstance($this->servicename, $this->password)->bulkBill(implode(';',$txids),$bulkuid,$callbackUrl,$details);
+        if (!$response) {
+            throw new \Exception('shit happened');
+        }
+
+        return $this->serializer->deserialize($response->getBody()->getContents(),BulkBillResponse::class,'xml');
     }
 
     public function responseToJson(BaseResponse $response)

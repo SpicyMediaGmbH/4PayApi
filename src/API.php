@@ -163,6 +163,20 @@ class API
         );
     }
 
+    public function bulkBill(string $txidlist, string $bulkId, string $callbackurl, bool $details = false)
+    {
+        return $this->makeGetRequest([
+                'command' => 'billbulk',
+                'servicename' => $this->servicename,
+                'password' => $this->password,
+                'txidlist' => $txidlist,
+                'detail' => $details,
+                'bulkuid'=> $bulkId,
+                'callbackurl' => $callbackurl
+            ]
+        );
+    }
+
     private function makeGetRequest(array $params): ?ResponseInterface
     {
         $request = new Request('GET', self::BASE_URL.http_build_query($params));
