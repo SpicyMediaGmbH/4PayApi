@@ -88,7 +88,7 @@ class API
         ]);
     }
 
-    public function authorizeWap(int $amount, string $type, string $msisdn, ?string $mccmnc, string $okurl, string $errorurl, string $stopsubcallbackurl, string $description, string $gtc, string $imprint, string $contact, string $faq, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false)
+    public function authorizeWap(int $amount, string $type, ?string $msisdn, ?string $mccmnc, string $okurl, string $errorurl, string $stopsubcallbackurl, string $description, string $gtc, string $imprint, string $contact, string $faq, ?string $txt1 = null, ?string $txt2=null, ?string $txt3=null, bool $details = false)
     {
         return $this->makeGetRequest([
             'command' => 'wapauthorize',
