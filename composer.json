@@ -14,7 +14,8 @@
         "php": "^7.1",
         "php-http/httplug": "^2.0",
         "php-http/guzzle6-adapter": "^2.0",
-        "jms/serializer": "^1.14"
+        "jms/serializer": "^1.14",
+        "endyjasmi/cuid": "^2.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",

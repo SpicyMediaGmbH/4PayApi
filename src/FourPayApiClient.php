@@ -2,6 +2,7 @@
 
 namespace FourPayApi;
 
+use EndyJasmi\Cuid;
 use FourPayApi\Responses\BaseResponse;
 use FourPayApi\Responses\BulkBillResponse;
 use FourPayApi\Responses\RefundResponse;
@@ -116,10 +117,14 @@ class FourPayApiClient
         return $this->serializer->deserialize($response->getBody()->getContents(),RefundResponse::class,'xml');
     }
 
-    public function bulkbill(array $txids, string $bulkuid, string $callbackUrl, bool $details = false): BulkBillResponse
+    public function bulkbill(array $txids, string $callbackUrl, ?string $bulkuid = null ,bool $details = false): BulkBillResponse
     {
         if (count($txids) > 500) {
             throw new \InvalidArgumentException('txids can not have more than 500 ids');
+        }
+
+        if (!$bulkuid) {
+            $bulkuid = Cuid::make();
         }
 
         $response = API::getInstance($this->servicename, $this->password)->bulkBill(implode(';',$txids),$bulkuid,$callbackUrl,$details);
