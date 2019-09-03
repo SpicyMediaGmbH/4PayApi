@@ -46,7 +46,7 @@ class API
             'mccmnc' => $mccmnc,
             'callbackurl' => $callbackurl,
             'stopsubcallbackurl' => $stopsubcallbackurl,
-            'detail' => $details,
+            'detail' => $details ? 'true' : 'false',
             'txt1' => $txt1,
             'txt2' => $txt2,
             'txt3' => $txt3,
@@ -63,7 +63,7 @@ class API
             'type' => $type,
             'msisdn' => $msisdn,
             'mccmnc' => $mccmnc,
-            'detail' => $details,
+            'detail' => $details ? 'true' : 'false',
             'okurl' => $okurl,
             'errorurl' => $errorurl,
             'stopsubcallbackurl' => $stopsubcallbackurl,
@@ -81,7 +81,7 @@ class API
             'password' => $this->password,
             'txid' => $txid,
             'pin' => $pin,
-            'detail' => $details,
+            'detail' => $details ? 'true' : 'false',
             'txt1' => $txt1,
             'txt2' => $txt2,
             'txt3' => $txt3,
@@ -101,7 +101,7 @@ class API
             'okurl' => $okurl,
             'errorurl' => $errorurl,
             'stopsubcallbackurl' => $stopsubcallbackurl,
-            'detail' => $details,
+            'detail' => $details ? 'true' : 'false',
             'description' => $description,
             'gtc' => $gtc,
             'imprint' => $imprint,
@@ -121,7 +121,7 @@ class API
                 'password' => $this->password,
                 'txid' => $txid,
                 'amount'=> $amount,
-                'detail' => $details
+                'detail' => $details ? 'true' : 'false'
             ]
         );
     }
@@ -133,7 +133,7 @@ class API
                 'servicename' => $this->servicename,
                 'password' => $this->password,
                 'txid' => $txid,
-                'detail' => $details
+                'detail' => $details ? 'true' : 'false'
             ]
         );
     }
@@ -145,7 +145,7 @@ class API
                 'servicename' => $this->servicename,
                 'password' => $this->password,
                 'txid' => $txid,
-                'detail' => $details
+                'detail' => $details ? 'true' : 'false'
             ]
         );
     }
@@ -157,7 +157,7 @@ class API
                 'servicename' => $this->servicename,
                 'password' => $this->password,
                 'txid' => $txid,
-                'detail' => $details,
+                'detail' => $details ? 'true' : 'false',
                 'amount'=> $amount
             ]
         );
@@ -170,7 +170,7 @@ class API
                 'servicename' => $this->servicename,
                 'password' => $this->password,
                 'txidlist' => $txidlist,
-                'detail' => $details,
+                'detail' => $details ? 'true' : 'false',
                 'bulkuid'=> $bulkId,
                 'callbackurl' => $callbackurl
             ]

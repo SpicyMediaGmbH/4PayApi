@@ -18,6 +18,8 @@ use FourPayApi\Responses\WebValidatePinResponse;
 
 class FourPayApiClient
 {
+
+    private const MESSAGE_TIMEOUT = 'A Timeout occurred';
     /** @var string */
     private $servicename;
     /** @var string */
@@ -41,7 +43,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->authorizeSms($amount,$type,$msisdn, $mccmnc,$callbackurl,$stopsubcallbackurl, $txt1, $txt2, $txt3, $details);
         if (!$response) {
-            throw new \Exception('shit happened');
+            throw new \Exception(self::MESSAGE_TIMEOUT);
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),SmsAuthorizeResponse::class,'xml');
@@ -51,7 +53,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->authorizeWeb($amount, $type, $msisdn, $okurl, $errorurl, $mccmnc, $stopsubcallbackurl, $txt1, $txt2, $txt3, $details);
         if (!$response) {
-            throw new \Exception('shit happened');
+            throw new \Exception(self::MESSAGE_TIMEOUT);
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),WebAuthorizeResponse::class,'xml');
@@ -61,7 +63,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->validateWebPin($txid, $pin);
         if (!$response) {
-            throw new \Exception('shit happened');
+            throw new \Exception(self::MESSAGE_TIMEOUT);
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),WebValidatePinResponse::class,'xml');
@@ -71,7 +73,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->authorizeWap($amount, $type, $msisdn, $mccmnc, $okurl, $errorurl, $stopsubcallbackurl, $description, $gtc, $imprint, $contact, $faq, $txt1, $txt2, $txt3, $details);
         if (!$response) {
-            throw new \Exception('shit happened');
+            throw new \Exception(self::MESSAGE_TIMEOUT);
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),WapAuthorizeResponse::class,'xml');
@@ -81,7 +83,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->bill($txid, $amount, $details);
         if (!$response) {
-            throw new \Exception('shit happened');
+            throw new \Exception(self::MESSAGE_TIMEOUT);
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),BillResponse::class,'xml');
@@ -91,7 +93,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->stopSubscription($txid, $details);
         if (!$response) {
-            throw new \Exception('shit happened');
+            throw new \Exception(self::MESSAGE_TIMEOUT);
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),StopSubscriptionResponse::class,'xml');
@@ -101,7 +103,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->getMno($txid, $details);
         if (!$response) {
-            throw new \Exception('shit happened');
+            throw new \Exception(self::MESSAGE_TIMEOUT);
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),GetMnoResponse::class,'xml');
@@ -111,7 +113,7 @@ class FourPayApiClient
     {
         $response = API::getInstance($this->servicename, $this->password)->refund($txid, $amount,$details);
         if (!$response) {
-            throw new \Exception('shit happened');
+            throw new \Exception(self::MESSAGE_TIMEOUT);
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),RefundResponse::class,'xml');
@@ -129,7 +131,7 @@ class FourPayApiClient
 
         $response = API::getInstance($this->servicename, $this->password)->bulkBill(implode(';',$txids),$bulkuid,$callbackUrl,$details);
         if (!$response) {
-            throw new \Exception('shit happened');
+            throw new \Exception(self::MESSAGE_TIMEOUT);
         }
 
         return $this->serializer->deserialize($response->getBody()->getContents(),BulkBillResponse::class,'xml');
