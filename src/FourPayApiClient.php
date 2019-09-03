@@ -129,7 +129,12 @@ class FourPayApiClient
             $bulkuid = Cuid::make();
         }
 
-        $response = API::getInstance($this->servicename, $this->password)->bulkBill(implode(';',$txids),$bulkuid,$callbackUrl,$details);
+        $idList = implode(';',$txids);
+        if (count($txids) === 1) {
+            $idList .= ';';
+        }
+
+        $response = API::getInstance($this->servicename, $this->password)->bulkBill($idList,$bulkuid,$callbackUrl,$details);
         if (!$response) {
             throw new \Exception(self::MESSAGE_TIMEOUT);
         }
